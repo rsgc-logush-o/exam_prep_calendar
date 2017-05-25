@@ -19,31 +19,186 @@ import Foundation
  Make use of your test plan and algorithm to ensure your code is complete.
  
  */
+
+struct Day
+{
+    var dayNumber : Int
+    var numberOfChars : Int
+}
+func logBase(val: Double, base: Double) -> Double
+{
+    return log(val)/log(base)
+}
+
 var inputToProcess : String = ""
+var week : Int? = nil
+var numberOfDays : Int? = nil
+var specialDay : Int? = nil
+var calendar : [String] = ["Sun ", "Mon ", "Tue ", "Wed ", "Thr ", "Fri ", "Sat\n"]
+var days = [Day]()
 
 // Loop until valid input is received
-while inputToProcess == "" {
+while week == nil {
     
     // Show the prompt
-    print("Ask the question here? ", terminator: "")
+    print("Enter day:", terminator: "\n")
     
     // Get the user's input
     var input : String?
     input = readLine()
     
     // Use optional binding to see if the string can be unwrapped (to see if it is not nil)
-    if let notNilInput = input {
+    if let notNilInput = Int(input!) {
+        
+        if notNilInput > 0 && notNilInput < 8
+        {
+            week = notNilInput
+        }
         
         // You probably need to add additional checks to be sure the
         // input received is valid
         // Add checks as needed...
         
         // Save the input given, as we are certain it's what we are looking for now
-        inputToProcess = notNilInput
+        
         
     }
     
 }
+
+while numberOfDays == nil {
+    
+    // Show the prompt
+    print("Enter the number of days in the month:", terminator: "\n")
+    
+    // Get the user's input
+    var input : String?
+    input = readLine()
+    
+    // Use optional binding to see if the string can be unwrapped (to see if it is not nil)
+    if let notNilInput = Int(input!) {
+        
+        if notNilInput > 0 && notNilInput < 32
+        {
+            numberOfDays = notNilInput
+        }
+        
+        // You probably need to add additional checks to be sure the
+        // input received is valid
+        // Add checks as needed...
+        
+        // Save the input given, as we are certain it's what we are looking for now
+        
+        
+    }
+    
+}
+
+while specialDay == nil {
+    
+    // Show the prompt
+    print("Enter the special day:", terminator: "\n")
+    
+    // Get the user's input
+    var input : String?
+    input = readLine()
+    
+    // Use optional binding to see if the string can be unwrapped (to see if it is not nil)
+    if let notNilInput = Int(input!) {
+        
+        if notNilInput > 0 && notNilInput <= numberOfDays!
+        {
+            specialDay = notNilInput
+        }
+        
+        // You probably need to add additional checks to be sure the
+        // input received is valid
+        // Add checks as needed...
+        
+        // Save the input given, as we are certain it's what we are looking for now
+        
+        
+    }
+    
+}
+
+var startSpacing : String = ""
+
+//for i in 1...(week!)
+//{
+//    
+//    startSpacing = startSpacing + "    "
+//}
+var i : Int = 1
+while i < week!
+{
+    startSpacing = startSpacing + "    "
+    i = i + 1
+}
+
+//while i < numberOfDays!
+//{
+//    if i == specialDay
+//    {
+//        
+//        days.append(Day(dayNumber: i, numberOfChars: Int(logBase(val: Double(i), base: 10)) + 2))
+//    }else{
+//        days.append(Day(dayNumber: i, numberOfChars: Int(logBase(val: Double(i), base: 10)) + 1))
+//    }
+//    i = i + 1
+//}
+for i in 1...numberOfDays!
+{
+    if i == specialDay
+    {
+    
+    days.append(Day(dayNumber: i, numberOfChars: Int(logBase(val: Double(i), base: 10)) + 2))
+    }else{
+        days.append(Day(dayNumber: i, numberOfChars: Int(logBase(val: Double(i), base: 10)) + 1))
+    }
+}
+
+calendar.append(startSpacing)
+
+for i in days
+{
+    var bufferString : String = ""
+    
+    var x : Int = 0
+    
+//    for x in 1...(3 - i.numberOfChars)
+//    {
+//        bufferString = bufferString + " "
+//    }
+    while x < 3 - i.numberOfChars
+    {
+        bufferString = bufferString + " "
+        x = x + 1
+    }
+    
+    if i.dayNumber == specialDay
+    {
+        bufferString = bufferString + "*"
+    }
+    bufferString = bufferString + String(i.dayNumber)
+    if((week! + i.dayNumber - 1) % 7 == 0)
+    {
+        bufferString = bufferString + "\n"
+    }else
+    {
+        bufferString = bufferString + " "
+    }
+    
+    calendar.append(bufferString)
+    
+}
+
+for i in calendar
+{
+    print(i, terminator: "")
+}
+
+
 
 /*
  
@@ -56,7 +211,6 @@ while inputToProcess == "" {
  */
 
 // Add 'process' code below....
-print("replace with process logic")
 
 
 /*
@@ -70,4 +224,4 @@ print("replace with process logic")
  */
 
 // Add 'output' code below... replace what is here as needed.
-print("The input given was: \(inputToProcess)")
+
