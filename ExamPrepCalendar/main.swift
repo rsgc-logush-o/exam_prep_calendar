@@ -78,7 +78,7 @@ while numberOfDays == nil {
     // Use optional binding to see if the string can be unwrapped (to see if it is not nil)
     if let notNilInput = Int(input!) {
         
-        if notNilInput > 0 && notNilInput < 32
+        if notNilInput > 27 && notNilInput < 32
         {
             numberOfDays = notNilInput
         }
